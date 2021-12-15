@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">TechTask</string>
+    <string name="name">Name</string>
+    <string name="email">Email</string>
+    <string name="add">Add</string>
+    <string name="title_add_user">Add a new user</string>
+    <string name="user_deleting_confirmation_title">Are you sure you want to remove this user?</string>
+    <string name="yes">Yes</string>
+    <string name="cancel">Cancel</string>
+    <string name="error_occurred_text">Error occurred while loading users</string>
+</resources>
