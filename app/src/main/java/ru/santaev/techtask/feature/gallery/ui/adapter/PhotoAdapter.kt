@@ -1,38 +1,42 @@
 package ru.santaev.techtask.feature.gallery.ui.adapter
 
 import android.view.LayoutInflater
+import android.view.ViewGroup
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import ru.santaev.techtask.R
 import ru.santaev.techtask.databinding.ListItemPhotoBinding
 import ru.santaev.techtask.feature.gallery.ui.entity.PhotoUiEntity
 import ru.santaev.techtask.utils.ListAdapter
 
 class PhotoAdapter(
-    private val photoClickListener: (String) -> Unit
-) : ListAdapter<PhotoUiEntity>(PhotoListDiffUtil()) {
+    private val photoClickListener: (PhotoUiEntity) -> Unit
+) : PagingDataAdapter<PhotoUiEntity, PhotoAdapter.PhotoViewHolder>(PhotoListDiffUtil()) {
 
-    init {
-        registerView(
-            matcher = { true },
-            viewHolderCreator = { parent ->
-                UserViewHolder(
-                    ListItemPhotoBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-                )
-            }
+    override fun onBindViewHolder(holder: PhotoViewHolder, position: Int) {
+        getItem(position)?.let { holder.bind(it) }
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PhotoViewHolder {
+        return PhotoViewHolder(
+            ListItemPhotoBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         )
     }
 
-    private inner class UserViewHolder(
+    inner class PhotoViewHolder(
         private val binding: ListItemPhotoBinding
-    ) : ViewHolder<PhotoUiEntity>(binding.root) {
+    ) : RecyclerView.ViewHolder(binding.root) {
 
-        override fun bind(item: PhotoUiEntity) {
+        fun bind(item: PhotoUiEntity) {
             Glide.with(binding.photo.context)
                 .load(item.url)
+                .placeholder(R.drawable.placeholder)
                 .centerCrop()
                 .into(binding.photo)
             binding.root.setOnLongClickListener {
-                photoClickListener.invoke(item.id)
+                photoClickListener.invoke(item)
                 true
             }
         }

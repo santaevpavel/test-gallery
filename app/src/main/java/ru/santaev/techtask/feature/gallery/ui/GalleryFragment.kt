@@ -6,10 +6,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isGone
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.coroutineScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.coroutines.launch
 import ru.santaev.techtask.R
 import ru.santaev.techtask.databinding.FragmentPhotosBinding
 import ru.santaev.techtask.feature.gallery.ui.adapter.PhotoAdapter
@@ -54,8 +57,16 @@ class GalleryFragment : Fragment() {
     private fun initViews() {
         binding.photos.adapter = adapter
         binding.photos.layoutManager = GridLayoutManager(requireContext(), COLUMNS)
-        viewModel.photos.observe(viewLifecycleOwner) { users ->
-            adapter.submitList(users)
+        adapter.addOnPagesUpdatedListener {
+            binding.skeleton.root.isGone = true
+        }
+        viewModel.photos.observe(viewLifecycleOwner) { photos ->
+            viewLifecycleOwner.lifecycle.coroutineScope.launch {
+                if (photos != null) {
+                    adapter.submitData(photos)
+
+                }
+            }
         }
         binding.photos.addItemDecoration(PhotosSpacingItemDecorator(requireContext(), COLUMNS))
     }

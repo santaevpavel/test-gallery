@@ -69,6 +69,9 @@ dependencies {
     //glide
     implementation 'com.github.bumptech.glide:glide:4.12.0'
 
+    //glide
+    implementation "androidx.paging:paging-runtime-ktx:3.1.0"
+
     //tests
     testImplementation 'junit:junit:4.13.2'
     testImplementation 'io.kotest:kotest-assertions-core:4.6.0'
