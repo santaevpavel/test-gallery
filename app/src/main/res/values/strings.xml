@@ -7,5 +7,5 @@
     <string name="user_deleting_confirmation_title">Are you sure you want to remove this user?</string>
     <string name="yes">Yes</string>
     <string name="cancel">Cancel</string>
-    <string name="error_occurred_text">Error occurred while loading users</string>
+    <string name="error_occurred_text">Error occurred while loading photos</string>
 </resources>

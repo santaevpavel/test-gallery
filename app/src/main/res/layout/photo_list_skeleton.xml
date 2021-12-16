@@ -1,30 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
 
-    <data>
-
-        <variable
-            name="item"
-            type="ru.santaev.techtask.network.entities.UserEntity" />
-    </data>
-
     <androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <include
-            layout="@layout/list_item_user_skeleton"
+            layout="@layout/list_item_photo_skeleton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
         <include
-            layout="@layout/list_item_user_skeleton"
+            layout="@layout/list_item_photo_skeleton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
         <include
-            layout="@layout/list_item_user_skeleton"
+            layout="@layout/list_item_photo_skeleton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 

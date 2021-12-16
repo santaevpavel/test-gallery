@@ -5,7 +5,7 @@
 
         <variable
             name="vm"
-            type="ru.santaev.techtask.feature.gallery.ui.UsersViewModel" />
+            type="ru.santaev.techtask.feature.gallery.ui.GalleryViewModel" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -36,24 +36,23 @@
             android:layout_marginTop="?attr/actionBarSize">
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/users"
+                android:id="@+id/photos"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_centerInParent="true"
                 android:clipChildren="false"
                 android:clipToPadding="false"
-                android:paddingBottom="100dp"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:paddingHorizontal="2dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:itemCount="5"
-                tools:listitem="@layout/list_item_user" />
+                tools:listitem="@layout/list_item_photo" />
 
             <include
-                bindInvisibleUnless="@{vm.isUsersLoading}"
-                layout="@layout/user_list_skeleton"
+                bindInvisibleUnless="@{false}"
+                layout="@layout/photo_list_skeleton"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -63,7 +62,7 @@
                 tools:visibility="invisible" />
 
             <com.google.android.material.textview.MaterialTextView
-                bindInvisibleUnless="@{vm.isErrorStateVisible}"
+                bindInvisibleUnless="@{false}"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/margin_medium"
@@ -79,17 +78,6 @@
                 tools:visibility="invisible" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/btnAddUser"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
-            android:layout_margin="16dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:srcCompat="@drawable/ic_baseline_add_24"
-            tools:ignore="ContentDescription" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

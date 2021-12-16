@@ -4,8 +4,7 @@ import ru.santaev.techtask.di.modules.AppModule
 import ru.santaev.techtask.di.modules.NetworkModule
 import ru.santaev.techtask.di.modules.ViewModelModule
 import dagger.Component
-import ru.santaev.techtask.feature.gallery.ui.UserCreationFragment
-import ru.santaev.techtask.feature.gallery.ui.UsersFragment
+import ru.santaev.techtask.feature.gallery.ui.GalleryFragment
 import javax.inject.Singleton
 
 @Singleton
@@ -20,6 +19,5 @@ interface AppComponent {
         fun build(): AppComponent
     }
 
-    fun inject(arg: UsersFragment)
-    fun inject(arg: UserCreationFragment)
+    fun inject(arg: GalleryFragment)
 }

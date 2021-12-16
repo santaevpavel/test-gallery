@@ -5,8 +5,7 @@ import dagger.Binds
 import dagger.MapKey
 import dagger.Module
 import dagger.multibindings.IntoMap
-import ru.santaev.techtask.feature.gallery.ui.UserCreationViewModel
-import ru.santaev.techtask.feature.gallery.ui.UsersViewModel
+import ru.santaev.techtask.feature.gallery.ui.GalleryViewModel
 import kotlin.reflect.KClass
 
 @Module
@@ -14,13 +13,8 @@ abstract class ViewModelModule {
 
     @Binds
     @IntoMap
-    @ViewModelKey(UsersViewModel::class)
-    internal abstract fun usersViewModel(viewModel: UsersViewModel): ViewModel
-
-    @Binds
-    @IntoMap
-    @ViewModelKey(UserCreationViewModel::class)
-    internal abstract fun userCreationViewModel(viewModel: UserCreationViewModel): ViewModel
+    @ViewModelKey(GalleryViewModel::class)
+    internal abstract fun usersViewModel(viewModel: GalleryViewModel): ViewModel
 }
 
 @Target(
