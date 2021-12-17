@@ -1,4 +1,4 @@
-package ru.santaev.techtask.feature.gallery.ui.adapter
+package ru.santaev.techtask.feature.gallery.ui.gallery.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -8,8 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import ru.santaev.techtask.R
 import ru.santaev.techtask.databinding.ListItemPhotoBinding
-import ru.santaev.techtask.feature.gallery.ui.entity.PhotoUiEntity
-import ru.santaev.techtask.utils.ListAdapter
+import ru.santaev.techtask.feature.gallery.ui.gallery.entity.PhotoUiEntity
 
 class PhotoAdapter(
     private val photoClickListener: (PhotoUiEntity) -> Unit
@@ -35,9 +34,8 @@ class PhotoAdapter(
                 .placeholder(R.drawable.placeholder)
                 .centerCrop()
                 .into(binding.photo)
-            binding.root.setOnLongClickListener {
+            binding.root.setOnClickListener {
                 photoClickListener.invoke(item)
-                true
             }
         }
     }

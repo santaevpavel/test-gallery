@@ -1,4 +1,4 @@
-package ru.santaev.techtask.feature.gallery.ui.entity
+package ru.santaev.techtask.feature.gallery.ui.gallery.entity
 
 data class PhotoUiEntity(
     val id: String,

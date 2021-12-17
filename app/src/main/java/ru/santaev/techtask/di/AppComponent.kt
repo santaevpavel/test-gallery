@@ -1,10 +1,11 @@
 package ru.santaev.techtask.di
 
+import dagger.Component
 import ru.santaev.techtask.di.modules.AppModule
 import ru.santaev.techtask.di.modules.NetworkModule
 import ru.santaev.techtask.di.modules.ViewModelModule
-import dagger.Component
-import ru.santaev.techtask.feature.gallery.ui.GalleryFragment
+import ru.santaev.techtask.feature.gallery.ui.details.PhotoDetailsFragment
+import ru.santaev.techtask.feature.gallery.ui.gallery.GalleryFragment
 import javax.inject.Singleton
 
 @Singleton
@@ -20,4 +21,5 @@ interface AppComponent {
     }
 
     fun inject(arg: GalleryFragment)
+    fun inject(arg: PhotoDetailsFragment)
 }

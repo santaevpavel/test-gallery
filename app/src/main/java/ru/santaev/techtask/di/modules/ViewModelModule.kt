@@ -5,7 +5,7 @@ import dagger.Binds
 import dagger.MapKey
 import dagger.Module
 import dagger.multibindings.IntoMap
-import ru.santaev.techtask.feature.gallery.ui.GalleryViewModel
+import ru.santaev.techtask.feature.gallery.ui.gallery.GalleryViewModel
 import kotlin.reflect.KClass
 
 @Module

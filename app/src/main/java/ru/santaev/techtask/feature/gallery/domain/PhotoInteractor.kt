@@ -12,20 +12,30 @@ class PhotoInteractor @Inject constructor(
     private val photoRepository: PhotoRepository
 ) {
 
+    suspend fun getPhoto(photoId: String): Photo {
+        return photoRepository.getPhoto(photoId).mapToPhoto(previewSize = 0)
+    }
+
     fun getPhotos(previewSize: Int): Flow<PagingData<Photo>> {
         return photoRepository.getPhotosPagingSource()
             .map { pagingData ->
                 pagingData.map { photo ->
-                    Photo(
-                        id = photo.id,
-                        author = photo.author,
-                        width = photo.width,
-                        height = photo.height,
-                        url = photo.url,
-                        downloadUrl = photo.downloadUrl,
-                        previewUrl = photoRepository.getPhotoUrl(photo.id, previewSize)
-                    )
+                    photo.mapToPhoto(previewSize)
                 }
             }
+    }
+
+    private fun PhotoApiEntity.mapToPhoto(
+        previewSize: Int
+    ): Photo {
+        return Photo(
+            id = id,
+            author = author,
+            width = width,
+            height = height,
+            url = url,
+            downloadUrl = downloadUrl,
+            previewUrl = photoRepository.getPhotoUrl(id, previewSize)
+        )
     }
 }

@@ -1,6 +1,7 @@
 package ru.santaev.techtask.network.api
 
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 import ru.santaev.techtask.network.entities.PhotoApiEntity
 
@@ -11,4 +12,9 @@ interface PhotoApiService {
         @Query("page") page: Int?,
         @Query("limit") limit: Int?
     ): List<PhotoApiEntity>
+
+    @GET("id/{id}/info")
+    suspend fun getPhoto(
+        @Path("id") id: String
+    ): PhotoApiEntity
 }

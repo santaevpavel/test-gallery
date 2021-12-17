@@ -5,7 +5,9 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.withContext
 import ru.santaev.techtask.di.modules.NetworkModule
 import ru.santaev.techtask.network.api.PhotoApiService
 import ru.santaev.techtask.network.entities.PhotoApiEntity
@@ -14,6 +16,12 @@ import javax.inject.Inject
 class PhotoRepository @Inject constructor(
     private val photoApi: PhotoApiService
 ) {
+
+    suspend fun getPhoto(photoId: String): PhotoApiEntity {
+        return withContext(Dispatchers.IO) {
+            photoApi.getPhoto(photoId)
+        }
+    }
 
     fun getPhotosPagingSource(): Flow<PagingData<PhotoApiEntity>> {
         return Pager(
@@ -29,7 +37,9 @@ class PhotoRepository @Inject constructor(
         page: Int?,
         limit: Int?
     ): List<PhotoApiEntity> {
-        return photoApi.getPhotos(page, limit)
+        return withContext(Dispatchers.IO) {
+            photoApi.getPhotos(page, limit)
+        }
     }
 
     fun getPhotoUrl(id: String, size: Int): String {

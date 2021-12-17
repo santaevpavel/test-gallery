@@ -1,4 +1,4 @@
-package ru.santaev.techtask.feature.gallery.ui
+package ru.santaev.techtask.feature.gallery.ui.gallery
 
 import android.content.Context
 import android.graphics.Rect
@@ -10,12 +10,13 @@ import androidx.core.view.isGone
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.coroutineScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.coroutines.launch
 import ru.santaev.techtask.R
 import ru.santaev.techtask.databinding.FragmentPhotosBinding
-import ru.santaev.techtask.feature.gallery.ui.adapter.PhotoAdapter
+import ru.santaev.techtask.feature.gallery.ui.gallery.adapter.PhotoAdapter
 import ru.santaev.techtask.utils.ViewModelFactory
 import ru.santaev.techtask.utils.appComponent
 import ru.santaev.techtask.utils.observe
@@ -29,7 +30,7 @@ class GalleryFragment : Fragment() {
     private val viewModel: GalleryViewModel by viewModels { viewModelFactory }
     private lateinit var binding: FragmentPhotosBinding
     private val adapter = PhotoAdapter(
-        photoClickListener = { }
+        photoClickListener = { navigateToPhotoDetailsScreen(it.id) }
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -64,11 +65,16 @@ class GalleryFragment : Fragment() {
             viewLifecycleOwner.lifecycle.coroutineScope.launch {
                 if (photos != null) {
                     adapter.submitData(photos)
-
                 }
             }
         }
         binding.photos.addItemDecoration(PhotosSpacingItemDecorator(requireContext(), COLUMNS))
+    }
+
+    private fun navigateToPhotoDetailsScreen(id: String) {
+        findNavController().navigate(
+            GalleryFragmentDirections.actionGalleryFragmentToPhotoDetailsFragment(id)
+        )
     }
 
     companion object {
@@ -89,6 +95,7 @@ private class PhotosSpacingItemDecorator(
     ) {
         val padding = context.resources.getDimensionPixelSize(R.dimen.photo_padding)
         val position = parent.getChildAdapterPosition(view)
+        // TODO fix it
         if (position >= 0) {
             val isStart = position % columns == 0
             val isEnd = position % columns == columns - 1
